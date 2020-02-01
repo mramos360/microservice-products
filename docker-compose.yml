@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql
+    container_name: products_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_ROOT_PASSWORD: root
+      #MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: products_pma
+    links:
+      - mysql
+    environment:
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8000:80
