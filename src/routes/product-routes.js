@@ -24,18 +24,13 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-    db.products.create({
-        name: req.body.name,
-        price: req.body.price
-    }).then(result => {
-        res.status(201).json({
-            message: "Product created",
-            createdOrder: {
-                name: result.name,
-                price: result.price
-            }
+    db.products.create(req.body)
+        .then(result => {
+            res.status(201).json({
+                message: "Product created",
+                createdProduct: result
+            })
         })
-    })
 })
 
 router.patch("/:id", (req, res) => {

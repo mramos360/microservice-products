@@ -6,7 +6,7 @@ const db = require('./src/models');
 const server = http.createServer(app);
 
 db.sequelize.sync({
-    
+    //force: true
 }).then(() => {
     server.listen(port, () => {
         console.log(`Product service listening on port ${port}`);
